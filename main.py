@@ -21,8 +21,14 @@ async def download_video(message: types.Message):
             ydl_opts = {
                 'format': 'best[ext=mp4]/best',
                 'outtmpl': 'video.mp4',
-                'max_filesize': 50 * 1024 * 1024, # 50MB limit (bepul server uchun)
+                'max_filesize': 50 * 1024 * 1024,
+                'quiet': True,
+                'no_warnings': True,
+                # Quyidagi qatorlarni qo'shing:
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'referer': 'https://www.google.com/',
             }
+
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([message.text])
             
